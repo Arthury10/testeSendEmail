@@ -1,0 +1,122 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+  margin-bottom: 7rem;
+  padding: 3rem;
+  border: 1px solid var(--grey3);
+  border-radius: 2rem;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+.form .inputscontainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.form .formstack {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.formgroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 45%;
+}
+
+.formgroup label {
+  color: var(--grey1);
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.formstack .formgroup .forminput {
+  /* width: 45rem; */
+  min-width: 20rem;
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--grey3);
+  border-radius: 0.5rem;
+}
+
+.forminput::placeholder {
+  color: var(--grey3);
+  font-size: 1.6rem;
+}
+
+.forminput:focus {
+  outline: none;
+}
+
+.formcheck {
+  width: 93%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.formcheck label {
+  color: var(--grey2);
+  font-size: 1.6rem;
+}
+
+.formcheck input[type="checkbox"] {
+  width: 2rem;
+  height: 2rem;
+}
+
+.btnform {
+  width: 93%;
+  display: flex;
+}
+
+.btnformsubmit {
+  width: 25rem;
+  background-color: var(--primary-color-green);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 1.4rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* --------- INÍCIO MEDIA QUERIES ---------*/
+
+@media (max-width: 1000px) {
+  /*INÍCIO FORM CONTATO*/
+  .sectionform .form {
+    gap: 0rem;
+  }
+
+  .sectionform.form .formstack {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .formcheck {
+    align-items: flex-start;
+    width: 90%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .btnform {
+    justify-content: center;
+    width: 90%;
+  }
+}

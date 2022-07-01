@@ -3,17 +3,31 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
-import { sendEmail } from "../services/hello";
-// import { sendEmailContact } from "../services/emailSend";
-// import { MobileNavbar } from "../public/mobileNavbar";
+import React, { useEffect, useState } from "react";
+
+import { FormContact } from "../components/FormContact";
+import { GoogleMaps } from "../components/GoogleMaps";
 
 const Home: NextPage = () => {
-  sendEmail();
-  // sendEmailContact();
-  // console.log(emailParams);
-  // console.log(mailersend);
+  const [menuHamburger, setMenuHamburger] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  //pegar o size da tela
 
-  // new MobileNavbar();
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 750) {
+        setMenuHamburger(false);
+        setIsOpen(false);
+      } else {
+        setMenuHamburger(true);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  //mostrar menu hamburguer quando a tela estiver em 750px
+
   return (
     <div>
       <Head>
@@ -25,21 +39,36 @@ const Home: NextPage = () => {
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         />
       </Head>
+
       <div id="home" className={styles.header}>
-        <div className={styles.contentHeader}>
-          <div className={styles.menuFixo}>
+        <div className={styles.contentheader}>
+          <div className={styles.menufixo}>
             <nav className={styles.nav}>
-              <Image
-                src={require("../public/assets/logo-ds-saude.png")}
-                alt="logo ds saude"
-                className={styles.logo}
-              />
-              <div className={styles.mobileMenu}>
-                <div className={styles.line1}></div>
-                <div className={styles.line2}></div>
-                <div className={styles.line3}></div>
+              <div className={styles.logo}>
+                <Image
+                  src={require("../public/assets/logo-ds-saude.png")}
+                  alt="logo ds saude"
+                />
               </div>
-              <ul className={styles.navList}>
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                style={{
+                  border: "none",
+                  background: "transparent",
+                  width: 30,
+                  height: 30,
+                }}
+              >
+                <div className={styles.mobilemenu}>
+                  <Image
+                    src={require("../public/assets/menu.svg")}
+                    alt="menu mobile"
+                    width={30}
+                    height={30}
+                  />
+                </div>
+              </button>
+              <ul className={styles.navlist}>
                 <li>
                   <a href="#home">Início</a>
                 </li>
@@ -56,144 +85,356 @@ const Home: NextPage = () => {
                   <a href="#contact">Contatos</a>
                 </li>
               </ul>
+              {isOpen && (
+                <ul className={styles.navlistactive}>
+                  <li>
+                    <a href="#home">Início</a>
+                  </li>
+                  <li>
+                    <a href="#exam">Exames</a>
+                  </li>
+                  <li>
+                    <a href="#report">Laudos</a>
+                  </li>
+                  <li>
+                    <a href="#plan">Planos</a>
+                  </li>
+                  <li>
+                    <a href="#contact">Contatos</a>
+                  </li>
+                </ul>
+              )}
             </nav>
           </div>
+
           <div className={styles.banner}>
-            <div className={styles.textBanner}>
-              <p className={styles.textWelcome}>Bem vindo à DS Saúde</p>
-              <h1 className={styles.titleBanner}>
+            <div className={styles.textbanner}>
+              <p className={styles.textwelcome}>Bem vindo à DS Saúde</p>
+              <h1 className={styles.titlebanner}>
                 O melhor convênio de saúde e segurança do trabalho para sua
                 empresa.
               </h1>
-              <p className={styles.descriptionBanner}>
+              <p className={styles.descriptionbanner}>
                 Aqui você encontrará o plano com os melhores benefícios para
                 seus colaboradores
               </p>
             </div>
-            <Image
-              src={require("../public/assets/banner-medico-colaboradores.png")}
-              alt="imagem de medico e colaboradores"
-              className={styles.imageBanner}
-            />
+            <div className={styles.imagebanner}>
+              <Image
+                src={require("../public/assets/banner-medico-colaboradores.png")}
+                alt="imagem de medico e colaboradores"
+              />
+            </div>
           </div>
         </div>
       </div>
+
       <div className={styles.main}>
-        <section className={styles.sectionform}>
+        <section id="exam" className={styles.sectioncards}>
+          <div className={styles.contentsection}>
+            <p className={styles.subtitlesectionexam}>Medicina Ocupacional</p>
+            <h2 className={styles.titlesection}>
+              Tranquilidade através de um amplo gerenciamento dos eventos
+              eSocial
+            </h2>
+            <div className={styles.listcards}>
+              <div className={styles.card}>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="12" cy="12" r="12" fill="#DEA650" />
+                  <path
+                    d="M17.091 8.18195L10.091 15.1819L6.90918 12.0001"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <h3 className={styles.titlecard}>ASO</h3>
+                <p className={styles.descriptioncard}>
+                  Exame admissional, Demissional, Periódico, Troca de Funções e
+                  Retorno ao trabalho.
+                </p>
+              </div>
+              <div className={styles.card}>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="12" cy="12" r="12" fill="#DEA650" />
+                  <path
+                    d="M17.091 8.18195L10.091 15.1819L6.90918 12.0001"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <h3 className={styles.titlecard}>Exames</h3>
+                <p className={styles.descriptioncard}>
+                  Realizamos os exames de Acuidade Visual, Audiometria,
+                  Eletrocardiograma, Eletroencefalograma, Exames laboratoriais,
+                  Raio-X, entre outros..
+                </p>
+              </div>
+              <div className={styles.card}>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="12" cy="12" r="12" fill="#DEA650" />
+                  <path
+                    d="M17.091 8.18195L10.091 15.1819L6.90918 12.0001"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <h3 className={styles.titlecard}>eSocial</h3>
+                <p className={styles.descriptioncard}>
+                  Transmissão dos eventos S2210, S2220 e S2240
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="report" className={styles.sectioncards}>
+          <div className={styles.contentsection}>
+            <p className={styles.subtitlesectionreport}>Laudos</p>
+            <h2 className={styles.titlesection}>
+              Elaboramos os documentos abaixo
+            </h2>
+            <div className={styles.listcards}>
+              {/* <div className={styles.card cardreport}> */}
+              <div className={styles.cardreport}>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="12" cy="12" r="12" fill="#008F59" />
+                  <path
+                    d="M17.091 8.18195L10.091 15.1819L6.90918 12.0001"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <h3 className={styles.titlecard}>LTCAT</h3>
+                <p className={styles.descriptioncard}>
+                  É o Laudo Técnico das Condições Ambientais do Trabalho
+                  elaborado pelo engenheiro do trabalho com intuito de
+                  documentar os agentes nocivos existentes e concluir se estes
+                  podem gerar insalubridade.
+                </p>
+              </div>
+              <div className={styles.cardreport}>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="12" cy="12" r="12" fill="#008F59" />
+                  <path
+                    d="M17.091 8.18195L10.091 15.1819L6.90918 12.0001"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <h3 className={styles.titlecard}>PGR</h3>
+                <p className={styles.descriptioncard}>
+                  O Programa de Gerenciamento de Risco é um conjunto de
+                  procedimentos, técnicas de gestão, métodos de avaliação,
+                  registros e controles de monitoramento. Para a prevenção de
+                  acidentes de trabalho.
+                </p>
+              </div>
+              <div className={styles.cardreport}>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="12" cy="12" r="12" fill="#008F59" />
+                  <path
+                    d="M17.091 8.18195L10.091 15.1819L6.90918 12.0001"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <h3 className={styles.titlecard}>PCMSO</h3>
+                <p className={styles.descriptioncard}>
+                  É o Programa de Controle Médico de Saúde Ocupacional elaborado
+                  pelo médico do trabalho visando proteger a saúde dos
+                  trabalhadores através de exames complementares. Visa
+                  identificar riscos aos colaboradores
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="esocial" className={styles.sectionesocial}>
+          <p className={styles.subtitlesectionreport}>2022 - 2023</p>
+          <h2 className={styles.titlesection}>Fluxo do eSocial</h2>
+          <div className={styles.listesocial}>
+            <div className={styles.itemlistesocial}>
+              <h4 className={styles.titlelistesocial}>s2210</h4>
+              <p className={styles.descriptionlistesocial}>
+                Comunicação do acidente de trabalho
+              </p>
+              <p className={styles.initialslistesocial}>cat</p>
+            </div>
+            <div className={styles.itemlistesocial}>
+              <h4 className={styles.titlelistesocial}>s2220</h4>
+              <p className={styles.descriptionlistesocial}>
+                Monitoramento de Saúde do trabalhador
+              </p>
+              <p className={styles.initialslistesocial}>aso</p>
+            </div>
+            <div className={styles.itemlistesocial}>
+              <h4 className={styles.titlelistesocial}>s2240</h4>
+              <p className={styles.descriptionlistesocial}>
+                Fator de risco agente nocivo
+              </p>
+              <p className={styles.initialslistesocial}>ltcat</p>
+            </div>
+          </div>
+          <Link href="https://login.esocial.gov.br/login.aspx" target="_blank">
+            <div className={styles.logoesocial}>
+              <Image
+                src={require("../public/assets/logo-e-social.png")}
+                alt="logo do esocial"
+              />
+            </div>
+          </Link>
+          <div className={styles.listlogoesocial}>
+            <div className={styles.contentlistesocial}>
+              <Link
+                href="https://www.caixa.gov.br/Paginas/home-caixa.aspx"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div className={styles.itemlogoesocial}>
+                  <Image
+                    src={require("../public/assets/logo-caixa.png")}
+                    alt="caixa economica federal"
+                  />
+                </div>
+              </Link>
+              <Link
+                href="https://www.gov.br/trabalho-e-previdencia/pt-br"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div className={styles.itemlogoesocial}>
+                  <Image
+                    src={require("../public/assets/logo-previdencia-social.png")}
+                    alt="previcencial social"
+                  />
+                </div>
+              </Link>
+              <Link
+                href="https://www.gov.br/receitafederal/pt-br"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div className={styles.itemlogoesocial}>
+                  <Image
+                    src={require("../public/assets/logo-receita-federal.png")}
+                    alt="receita federal"
+                  />
+                </div>
+              </Link>
+              <Link
+                href="https://empregabrasil.mte.gov.br/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div className={styles.itemlogoesocial}>
+                  <Image
+                    src={require("../public/assets/logo-mte.png")}
+                    alt="ministerio do trabalho e emprego"
+                  />
+                </div>
+              </Link>
+              <Link
+                href="https://www.gov.br/trabalho-e-previdencia/pt-br"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div className={styles.itemlogoesocial}>
+                  <Image
+                    src={require("../public/assets/logo-inss.png")}
+                    alt="Inss"
+                  />
+                </div>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section id="plan" className={styles.sectionplan}>
+          <p className={styles.subtitlesectionreport}>Valores</p>
+          <h2 className={styles.titlesection}>
+            Contrate a DS Saúde para a sua empresa
+          </h2>
+          <div className={styles.contentplan}>
+            <div className={styles.infoplan}>
+              <h5 className={styles.titleplan}>Plano SST</h5>
+              <p className={styles.descriptionplan}>
+                Saúde e Segurança do Trabalho
+              </p>
+              <div className={styles.contentprice}>
+                <p className={styles.adicionaltextplan}>Valores a partir</p>
+                <p className={styles.priceplan}>
+                  <strong>R$ 30</strong>/mensais
+                </p>
+                <p className={styles.adicionaltextplan}>Por colaborador</p>
+                <Link href="#contact">
+                  <p className={styles.buttonplan}>Entrar em contato</p>
+                </Link>
+              </div>
+            </div>
+            <div style={{ padding: 30 }}>
+              <Image
+                src={require("../public/assets/image-plan.png")}
+                alt="medico feliz atendendo"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.sectionform} id="contact">
           <div className={styles.titlecontainer}>
             <p className={styles.subtitle}>ENTRAR EM CONTATO</p>
             <h2 className={styles.title}>Formulário de Contato</h2>
           </div>
-          <form className={styles.form} id="formContact" method="post">
-            <div className={styles.inputscontainer}>
-              <div className={styles.formstack}>
-                <div className={styles.formgroup}>
-                  <label htmlFor="name">Nome do responsável *</label>
-                  <input
-                    type="text"
-                    className={styles.forminput}
-                    id="name"
-                    placeholder="Nome"
-                  />
-                </div>
-                <div className={styles.formgroup}>
-                  <label htmlFor="name">Nome da empresa *</label>
-                  <input
-                    type="text"
-                    className={styles.forminput}
-                    id="nameCompany"
-                    placeholder="Empresa Tal LTDA"
-                  />
-                </div>
-              </div>
-              <div className={styles.formstack}>
-                <div className={styles.formgroup}>
-                  <label htmlFor="email">E-mail *</label>
-                  <input
-                    type="text"
-                    className={styles.forminput}
-                    id="email"
-                    placeholder="Fulano@email.com"
-                  />
-                </div>
-                <div className={styles.formgroup}>
-                  <label htmlFor="telephone">Telefone *</label>
-                  <input
-                    type="text"
-                    className={styles.forminput}
-                    id="telephone"
-                    placeholder="(53) 0000.0000"
-                  />
-                </div>
-              </div>
-              <div className={styles.formstack}>
-                <div className={styles.formgroup}>
-                  <label htmlFor="phone">Celular *</label>
-                  <input
-                    type="text"
-                    className={styles.forminput}
-                    id="phone"
-                    placeholder="(53) 9 0000.0000"
-                  />
-                </div>
-                <div className={styles.formgroup}>
-                  <label htmlFor="subject">Assunto *</label>
-                  <input
-                    type="text"
-                    className={styles.forminput}
-                    id="subject"
-                    placeholder="ex: Assinatura do Plano"
-                  />
-                </div>
-              </div>
-              <div className={styles.formstack}>
-                <div className={styles.formgroup}>
-                  <label htmlFor="numberCollaborators">
-                    Número de Colaboradores *
-                  </label>
-                  <input
-                    type="text"
-                    className={styles.forminput}
-                    id="numberCollaborators"
-                    placeholder="ex: 50"
-                  />
-                </div>
-                <div className={styles.formgroup}>
-                  <label htmlFor="cnpj">CNPJ *</label>
-                  <input
-                    type="text"
-                    className={styles.forminput}
-                    id="cnpj"
-                    placeholder="00.000.000/0000-00"
-                  />
-                </div>
-              </div>
-              <div className={styles.formtextarea}>
-                <label htmlFor="message">Mensagem</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  placeholder="Escreva aqui o que deseja saber sobre o plano DS Saúde"
-                ></textarea>
-              </div>
-              <div className={styles.formcheck}>
-                <input type="checkbox" id="checkTerms" name="terms" />
-                <label htmlFor="checkTerms">
-                  Eu concordo em compartilhar os meus dados com a DS Saúde e
-                  aceito entrarem em contato comigo.
-                </label>
-              </div>
-              <div className={styles.btnform}>
-                <button
-                  className={styles.btnformsubmit}
-                  id="btnSubmitForm"
-                  type="submit"
-                >
-                  Enviar
-                </button>
-              </div>
-            </div>
-          </form>
+          <FormContact />
         </section>
 
         <div className={styles.sectioncontact}>
@@ -207,7 +448,7 @@ const Home: NextPage = () => {
                 <div className={styles.socialmanager}>
                   <Image
                     src={require("../public/assets/whatsapp.svg")}
-                    alt="Email"
+                    alt="whatsapp"
                   />
 
                   <Link
@@ -218,7 +459,7 @@ const Home: NextPage = () => {
                     <p className={styles.textsocialmanager}>(53) 9 9700.5000</p>
                   </Link>
                 </div>
-                <div className={(styles.socialmanager, styles.socialmail)}>
+                <div className={styles.socialmail}>
                   <Image
                     src={require("../public/assets/email.svg")}
                     alt="Email"
@@ -238,20 +479,11 @@ const Home: NextPage = () => {
 
             <div className={styles.contactcompany}>
               <div className={styles.listmapsocial}>
-                {/* <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3392.250346799296!2d-52.34223399999999!3d-31.7636572!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9511b598faccec7b%3A0xbe5c5e1d73e59e0e!2sR.%20Maj.%20C%C3%ADcero%20de%20G%C3%B3es%20Monteiro%2C%20405%20-%20Centro%2C%20Pelotas%20-%20RS%2C%2096015-190!5e0!3m2!1spt-PT!2sbr!4v1654613046247!5m2!1spt-PT!2sbr"
-                  width="600"
-                  height="450"
-                  style="border:0;"
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
-                ></iframe> */}
-
+                <GoogleMaps />
                 <div className={styles.listsocialcompany}>
                   <a
                     href="https://www.google.com/maps/place/R.+Maj.+C%C3%ADcero+de+G%C3%B3es+Monteiro,+405+-+Centro,+Pelotas+-+RS,+96015-190/@-31.7636572,-52.342234,17z/data=!3m1!4b1!4m5!3m4!1s0x9511b598faccec7b:0xbe5c5e1d73e59e0e!8m2!3d-31.7636572!4d-52.342234"
-                    className="social-company"
+                    className={styles.socialcompany}
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -273,7 +505,7 @@ const Home: NextPage = () => {
                   </a>
                   <a
                     href="https://wa.me/555330285300"
-                    className="social-company"
+                    className={styles.socialcompany}
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -291,7 +523,7 @@ const Home: NextPage = () => {
                     </svg>
 
                     <p className={styles.textsocialcompany}>
-                      Whatsapp(53) 3028.5300
+                      Whatsapp(53) <br /> 3028.5300
                     </p>
                   </a>
                 </div>

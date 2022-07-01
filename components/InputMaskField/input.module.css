@@ -1,0 +1,45 @@
+.formgroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 45%;
+}
+
+.formgroup label {
+  color: var(--grey1);
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.forminput {
+  /* width: 45rem; */
+  min-width: 20rem;
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--grey3);
+  border-radius: 0.5rem;
+}
+
+.forminput::placeholder {
+  color: var(--grey3);
+  font-size: 1.6rem;
+}
+
+.forminput:focus {
+  outline: none;
+}
+
+.error {
+  color: red;
+  font-size: 1.2rem;
+  height: 1rem;
+}
+
+/* --------- INÍCIO MEDIA QUERIES ---------*/
+
+@media (max-width: 1000px) {
+  .formgroup {
+    width: 90%;
+  }
+}

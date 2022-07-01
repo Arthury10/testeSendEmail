@@ -1,5 +1,5 @@
 /* --------- INÍCIO CONFIG. GERAL HEADER ---------*/
-.contentHeader {
+.contentheader {
   max-width: 1200px;
   display: grid;
   grid-template-columns: 1fr;
@@ -16,11 +16,12 @@
 
 /* --------- INÍCIO CONFIG. NAVEGAÇÃO ---------*/
 
-.menuFixo {
+.menufixo {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
+  z-index: 1;
 }
 
 .nav {
@@ -32,21 +33,21 @@
   align-items: center;
 }
 
-.navList {
+.navlist {
   list-style: none;
   display: flex;
   align-items: center;
   gap: 2rem;
 }
 
-.navList li a {
+.navlist li a {
   text-decoration: none;
   color: var(--primary-color-green);
   transition: 0.3s;
   font-size: 1.6rem;
 }
 
-.navList li a:hover {
+.navlist li a:hover {
   opacity: 0.7;
 }
 
@@ -55,12 +56,12 @@
   max-height: 4.7rem;
 }
 
-.mobileMenu {
+.mobilemenu {
   display: none;
   cursor: pointer;
 }
 
-.mobileMenu div {
+.mobilemenu div {
   width: 3.2rem;
   height: 0.2rem;
   background-color: var(--primary-color-green);
@@ -81,7 +82,7 @@
   /* padding-inline: 3rem; */
 }
 
-.textBanner {
+.textbanner {
   margin: auto 0;
   max-width: 49.8rem;
   text-align: left;
@@ -89,12 +90,12 @@
 /* --------- FIM CONFIG. GERAL BANNER ---------*/
 
 /* --------- INÍCIO CONFIG. BANNER ---------*/
-.imageBanner {
+.imagebanner {
   max-width: 100%;
   display: block;
 }
 
-.textWelcome {
+.textwelcome {
   font-style: normal;
   font-weight: 700;
   font-size: 1.4rem;
@@ -103,7 +104,7 @@
   color: var(--primary-color-green);
 }
 
-.titleBanner {
+.titlebanner {
   font-style: normal;
   font-weight: 700;
   font-size: 4rem;
@@ -113,7 +114,7 @@
   color: var(--grey1);
 }
 
-.descriptionBanner {
+.descriptionbanner {
   font-style: normal;
   font-weight: 400;
   font-size: 1.8rem;
@@ -123,18 +124,18 @@
 /* --------- FIM CONFIG. BANNER ---------*/
 
 /* --------- INÍCIO CONFIG. GERAL SESSÃO DE CARDS ---------*/
-.sectionCards {
+.sectioncards {
   background-color: white;
-  padding-top: 7rem;
+  padding-top: 12rem;
 }
 
-.contentSection {
+.contentsection {
   max-width: 1200px;
   margin: 0 auto;
   padding-inline: 2rem;
 }
 
-.listCards {
+.listcards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   padding-top: 6rem;
@@ -159,7 +160,7 @@
   box-shadow: 0px 0px 0px 0.5px var(--second-color-yellow) inset;
 }
 
-.subtitleSectionExam {
+.subtitlesectionexam {
   font-style: normal;
   font-weight: 700;
   font-size: 1.5rem;
@@ -170,7 +171,7 @@
   color: var(--second-color-yellow);
 }
 
-.subtitleSectionReport {
+.subtitlesectionreport {
   font-style: normal;
   font-weight: 700;
   font-size: 1.5rem;
@@ -181,7 +182,7 @@
   color: var(--primary-color-green);
 }
 
-.titleSection {
+.titlesection {
   font-style: normal;
   font-weight: 700;
   font-size: 3rem;
@@ -192,7 +193,7 @@
   margin-top: 1.6rem;
 }
 
-.titleCard {
+.titlecard {
   padding-bottom: 1rem;
   padding-top: 1.6rem;
   font-style: normal;
@@ -202,7 +203,7 @@
   text-align: left;
 }
 
-.descriptionCard {
+.descriptioncard {
   font-style: normal;
   font-weight: 400;
   font-size: 1.6rem;
@@ -211,24 +212,30 @@
   text-align: left;
 }
 
-.cardReport {
+.cardreport svg {
+  display: block;
+}
+
+.cardreport {
+  padding: 2rem;
+  border-radius: 0.6rem;
   background-color: var(--primary-color-opacity);
 }
 
-.cardReport:hover {
+.cardreport:hover {
   box-shadow: 0px 0px 0px 0.5px var(--primary-color-green) inset;
 }
 
 /* --------- FIM CONFIG. SESSÃO DE CARDS ---------*/
 
 /* --------- INÍCIO CONFIG. GERAL SESSÃO DE ESOCIAL ---------*/
-.sectionSsocial {
+.sectionesocial {
   background-color: white;
-  padding-top: 7rem;
+  padding-top: 12rem;
   align-items: center;
 }
 
-.listEsocial {
+.listesocial {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   padding-bottom: 3rem;
@@ -238,13 +245,14 @@
   gap: 8rem;
 }
 
-.logoEsocial {
+.logoesocial {
   margin-bottom: 3rem;
-  width: 15rem;
   height: 6rem;
+  justify-content: center;
+  flex: 1;
 }
 
-.contentListEsocial {
+.contentlistesocial {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   max-width: 1200px;
@@ -254,7 +262,7 @@
   align-items: center;
 }
 
-.listLogoEsocial {
+.listlogoesocial {
   background-color: var(--primary-color-opacity);
   padding-top: 3rem;
   padding-bottom: 3rem;
@@ -264,12 +272,12 @@
 /* --------- FIM CONFIG. GERAL SESSÃO DE ESOCIAL ---------*/
 
 /* --------- INÍCIO CONFIG. SESSÃO DE ESOCIAL ---------*/
-.itemLogoEsocial {
+.itemlogoesocial {
   max-width: 70%;
   margin: auto;
 }
 
-.titleListSsocial {
+.titlelistesocial {
   font-style: normal;
   font-weight: 700;
   font-size: 4rem;
@@ -278,7 +286,7 @@
   color: var(--grey1);
 }
 
-.descriptionListEsocial {
+.descriptionlistesocial {
   font-style: normal;
   font-weight: 400;
   font-size: 1.8rem;
@@ -287,7 +295,7 @@
   color: var(--grey2);
 }
 
-.initialsListEsocial {
+.initialslistesocial {
   background-color: var(--primary-color-green);
   font-style: normal;
   font-weight: 700;
@@ -310,7 +318,7 @@
 /* --------- INÍCIO CONFIG. GERAL SESSÃO DE PLANOS ---------*/
 .sectionplan {
   background-color: white;
-  padding-top: 7rem;
+  padding-top: 12rem;
   padding-bottom: 7rem;
   align-items: center;
 }
@@ -368,7 +376,7 @@
   opacity: 50%;
 } */
 
-.adicionaltext-plan {
+.adicionaltextplan {
   font-style: normal;
   font-weight: 400;
   font-size: 1.8rem;
@@ -408,6 +416,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 /* --------- FIM CONFIG. SESSÃO DE PLANOS ---------*/
 .sectioncontact {
@@ -430,6 +439,7 @@
   background-color: white;
   align-items: center;
   justify-content: center;
+  padding-top: 12rem;
 }
 
 .titlecontainer .subtitle {
@@ -443,133 +453,6 @@
 .titlecontainer .title {
   font-size: 4rem;
   color: var(--grey1);
-}
-
-.sectionform .form {
-  display: flex;
-  flex-direction: column;
-  margin-top: 3rem;
-  margin-bottom: 7rem;
-  padding: 3rem;
-  border: 1px solid var(--grey3);
-  border-radius: 2rem;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-}
-
-.sectionform .form .inputscontainer {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  justify-content: center;
-  align-items: center;
-}
-
-.sectionform .form .formstack {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 1rem;
-  justify-content: space-between;
-  gap: 2rem;
-  justify-content: center;
-  align-items: center;
-}
-
-.formgroup {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
-  width: 45%;
-}
-
-.formgroup label {
-  color: var(--grey1);
-  font-size: 1.8rem;
-  font-weight: 700;
-}
-
-.formstack .formgroup .forminput {
-  /* width: 45rem; */
-  min-width: 20rem;
-  width: 100%;
-  padding: 1rem;
-  border: 1px solid var(--grey3);
-  border-radius: 0.5rem;
-}
-
-.forminput::placeholder {
-  color: var(--grey3);
-  font-size: 1.6rem;
-}
-
-.forminput:focus {
-  outline: none;
-}
-
-.formtextarea {
-  width: 93%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
-}
-.formtextarea label {
-  color: var(--grey1);
-  font-size: 1.8rem;
-  font-weight: 700;
-}
-
-.formtextarea textarea {
-  font-size: 1.6rem;
-  min-width: 20rem;
-  width: 100%;
-  padding: 1.7rem;
-  border: 1px solid var(--grey3);
-  border-radius: 0.5rem;
-  height: 16rem;
-  resize: none;
-  color: var(--grey3);
-}
-
-.formgroup textarea::placeholder {
-  color: var(--grey3);
-  font-size: 1.6rem;
-}
-
-.formcheck {
-  width: 93%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
-}
-
-.formcheck label {
-  color: var(--grey2);
-  font-size: 1.6rem;
-}
-
-.formcheck input[type="checkbox"] {
-  width: 2rem;
-  height: 2rem;
-}
-
-.btnform {
-  width: 93%;
-  display: flex;
-}
-
-.btnformsubmit {
-  width: 25rem;
-  background-color: var(--primary-color-green);
-  color: white;
-  border: none;
-  border-radius: 0.5rem;
-  padding: 1.4rem;
-  font-size: 1.4rem;
-  font-weight: 500;
-  cursor: pointer;
 }
 
 /* --------- INÍCIO CONFIG. GERAL SESSÃO DE CONTATOS ---------*/
@@ -612,25 +495,31 @@
   padding-top: 3rem;
 }
 
-.socialmanager a,
-.socialmail a {
+.socialmanager {
   text-decoration: none;
   color: var(--primary-color-green);
   font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.socialmail {
+  display: grid;
+  grid-template-columns: 1fr;
+  text-decoration: none;
+  color: var(--primary-color-green);
+  font-size: 1.6rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  cursor: pointer;
 }
 
 .textsocialmanager {
   padding-top: 0.5rem;
 }
 
-.socialmail {
-  display: grid;
-  grid-template-columns: 1fr;
-}
-
 /* -------------------------------------------------*/
 
-.listSocialcompany {
+.listsocialcompany {
   display: grid;
   grid-template-columns: 1fr 1fr;
   background-color: var(--primary-color-green);
@@ -836,8 +725,27 @@
   }
 }
 
-.navlist.active {
+.navlistactive {
   transform: translateX(0);
+  position: absolute;
+  top: 8vh;
+  right: 0;
+  width: 100vw;
+  height: 92vh;
+  background-color: var(--second-color-opacity);
+  flex-direction: column;
+  align-items: center;
+  padding-top: 7rem;
+  margin-top: 2rem;
+  gap: 3rem;
+  transition: transform 0.3s ease-in;
+}
+
+.navlistactive li a {
+  font-size: 2rem;
+  text-decoration: none;
+  color: #008f59;
+  line-height: 3;
 }
 
 @keyframes navLinkFade {
