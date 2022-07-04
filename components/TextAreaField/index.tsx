@@ -19,6 +19,9 @@ export const TextAreaField = ({ name }: TextAreaFieldProps) => {
       <textarea
         id="message"
         placeholder="Escreva aqui o que deseja saber sobre o plano DS Saúde"
+        onChange={onChange}
+        onBlur={onBlur}
+        value={value}
         name={name}
       ></textarea>
       <div className={styles.error}>{error && <p>{error.message}</p>}</div>

@@ -8,13 +8,11 @@ interface InputFieldProps {
   placeholder?: string;
   error?: string;
   isRequired?: boolean;
-  mask?: string;
 }
 
 export const InputField = ({
   name,
   label,
-  mask,
   type,
   placeholder,
   isRequired,

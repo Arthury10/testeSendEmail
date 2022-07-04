@@ -39,15 +39,8 @@ export const FormContact = () => {
     mode: "onChange",
     resolver: yupResolver(formContact),
   });
-  // const [bodyForm, setBody] = useState<bodyProps>();
-
-  // const { handleSubimitEmail } = sendEmail({
-  //   body: bodyForm,
-  //   setText: "Test",
-  // });
 
   const onSubmit = form.handleSubmit(async (data) => {
-    // setBody(data);
     console.log("submit");
     const response = await sendEmail({
       body: data,

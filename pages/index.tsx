@@ -9,24 +9,17 @@ import { FormContact } from "../components/FormContact";
 import { GoogleMaps } from "../components/GoogleMaps";
 
 const Home: NextPage = () => {
-  const [menuHamburger, setMenuHamburger] = useState(false);
+  const [menuHamburgerClassName, setMenuHamburgerClassName] = useState(
+    styles.mobilemenu
+  );
   const [isOpen, setIsOpen] = useState(false);
-  //pegar o size da tela
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 750) {
-        setMenuHamburger(false);
-        setIsOpen(false);
-      } else {
-        setMenuHamburger(true);
-      }
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  //mostrar menu hamburguer quando a tela estiver em 750px
+  const handleOpenMenuMobile = () => {
+    setIsOpen(!isOpen);
+    isOpen
+      ? setMenuHamburgerClassName(styles.mobilemenu)
+      : setMenuHamburgerClassName(styles.mobilemenuactive);
+  };
 
   return (
     <div>
@@ -51,21 +44,20 @@ const Home: NextPage = () => {
                 />
               </div>
               <button
-                onClick={() => setIsOpen(!isOpen)}
+                onClick={handleOpenMenuMobile}
+                className={styles.menuBtn}
                 style={{
                   border: "none",
                   background: "transparent",
                   width: 30,
                   height: 30,
+                  //media query quando estiver em 750px adicoonar display: block
                 }}
               >
-                <div className={styles.mobilemenu}>
-                  <Image
-                    src={require("../public/assets/menu.svg")}
-                    alt="menu mobile"
-                    width={30}
-                    height={30}
-                  />
+                <div className={menuHamburgerClassName}>
+                  <div className={styles.line1}></div>
+                  <div className={styles.line2}></div>
+                  <div className={styles.line3}></div>
                 </div>
               </button>
               <ul className={styles.navlist}>

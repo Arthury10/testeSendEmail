@@ -56,9 +56,21 @@
   max-height: 4.7rem;
 }
 
+.menuBtn {
+  display: none;
+  border: "none";
+  background: "transparent";
+  width: 30;
+  height: 30;
+}
+
 .mobilemenu {
   display: none;
   cursor: pointer;
+}
+
+.mobilemenuactive {
+  display: none;
 }
 
 .mobilemenu div {
@@ -736,7 +748,6 @@
   flex-direction: column;
   align-items: center;
   padding-top: 7rem;
-  margin-top: 2rem;
   gap: 3rem;
   transition: transform 0.3s ease-in;
 }
@@ -759,15 +770,36 @@
   }
 }
 
-.mobilemenu.active .line1 {
+.menuBtn {
+  display: block;
+}
+
+.mobilemenu {
+  display: block;
+}
+
+.mobilemenuactive {
+  cursor: pointer;
+  display: block;
+}
+
+.mobilemenuactive div {
+  width: 3.2rem;
+  height: 0.2rem;
+  background-color: var(--primary-color-green);
+  margin: 0.8rem;
+  transition: 0.3s;
+}
+
+.mobilemenuactive .line1 {
   transform: rotate(-45deg) translate(-8px, 8px);
 }
 
-.mobilemenu.active .line2 {
+.mobilemenuactive .line2 {
   opacity: 0;
 }
 
-.mobilemenu.active .line3 {
+.mobilemenuactive .line3 {
   transform: rotate(45deg) translate(-5px, -7px);
 }
 
