@@ -2,12 +2,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { formContact } from "../../public/validator/shemaForm";
-import { sendEmail } from "../../services/mailerSend";
+import { api } from "../../services/api";
 import { CheckBox } from "../CheckBox";
 import { InputField } from "../InputField";
 import { InputMaskField } from "../InputMaskField";
 import { TextAreaField } from "../TextAreaField";
 import styles from "./form.module.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 type bodyProps = {
   name: string;
@@ -23,7 +25,21 @@ type bodyProps = {
 };
 
 export const FormContact = () => {
+
+  
   const form = useForm({
+    // defaultValues: {
+    //   name: "",
+    //   company: "",
+    //   email: "",
+    //   telephone: "",
+    //   phone: "",
+    //   subject: "",
+    //   numberCollaborators: "",
+    //   cnpj: "",
+    //   message: "",
+    //   checkTerms: false,
+    // },
     defaultValues: {
       name: "Arthur Ropke",
       company: "Arthur Ropke",
@@ -41,17 +57,34 @@ export const FormContact = () => {
   });
 
   const onSubmit = form.handleSubmit(async (data) => {
-    console.log("submit");
-    const response = await sendEmail({
-      body: data,
-      setText: "Test",
-      subject: "Test",
-    });
-    console.log(response);
+    try {
+      toast.success("Mensagem Enviada com sucesso!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      form.reset();
+      await api.post("/mailerSend", data);
+    } catch (err) {
+      toast.error("Erro ao enviar mensagem!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   });
 
   return (
     <FormProvider {...form}>
+      <ToastContainer />
       <form className={styles.form} onSubmit={onSubmit}>
         <div className={styles.inputscontainer}>
           <div className={styles.formstack}>
@@ -137,6 +170,7 @@ export const FormContact = () => {
           </div>
         </div>
       </form>
+
     </FormProvider>
   );
 };

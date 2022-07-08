@@ -11,12 +11,14 @@
   "dependencies": {
     "@hookform/resolvers": "^2.9.3",
     "@react-google-maps/api": "^2.12.0",
+    "axios": "^0.27.2",
     "mailersend": "^1.3.2",
     "next": "12.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.33.0",
     "react-input-mask": "^2.0.4",
+    "react-toastify": "^9.0.5",
     "yup": "^0.32.11"
   },
   "devDependencies": {
