@@ -1,28 +1,32 @@
+import InputMask from "react-input-mask";
 import { useController } from "react-hook-form";
 import styles from "./input.module.css";
+import React from "react";
 
-interface InputFieldProps {
+interface InputMaskFieldProps {
   name: string;
   label?: string;
   type?: string;
   placeholder?: string;
-  error?: string;
   isRequired?: boolean;
+  mask: string;
 }
 
-export const InputField = ({
+export const InputMaskField = ({
   name,
   label,
-  type,
-  placeholder,
   isRequired,
-}: InputFieldProps) => {
+  mask,
+  placeholder,
+  type,
+}: InputMaskFieldProps) => {
   const {
     field: { onChange, onBlur, value },
     fieldState: { error },
   } = useController({
     name,
   });
+
   return (
     <div className={styles.formgroup}>
       {label && (
@@ -30,9 +34,10 @@ export const InputField = ({
           {label} {isRequired && <span style={{ color: "#E05E5E" }}>*</span>}
         </label>
       )}
-      <input
-        type={type}
+      <InputMask
         className={styles.forminput}
+        mask={mask}
+        type={type}
         placeholder={placeholder}
         name={name}
         onChange={onChange}

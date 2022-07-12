@@ -262,6 +262,7 @@
   height: 6rem;
   justify-content: center;
   flex: 1;
+  cursor: pointer;
 }
 
 .contentlistesocial {
@@ -287,6 +288,7 @@
 .itemlogoesocial {
   max-width: 70%;
   margin: auto;
+  cursor: pointer;
 }
 
 .titlelistesocial {

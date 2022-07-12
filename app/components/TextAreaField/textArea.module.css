@@ -20,7 +20,7 @@
   border-radius: 0.5rem;
   height: 16rem;
   resize: none;
-  color: var(--grey3);
+  outline: none;
 }
 
 .formgroup textarea::placeholder {

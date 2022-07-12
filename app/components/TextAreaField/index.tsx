@@ -1,5 +1,6 @@
 import styles from "./textArea.module.css";
 import { useController } from "react-hook-form";
+import React from "react";
 
 interface TextAreaFieldProps {
   name: string;

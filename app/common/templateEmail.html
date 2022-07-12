@@ -1,48 +1,5 @@
-import Recipient from "mailersend/src/Recipient";
-import EmailParams from "mailersend/src/EmailParams";
-import MailerSend from "mailersend";
-import logo from "../../public/assets/logo.png";
-import onda from "../../public/assets/onda.png";
-import "react-toastify/dist/ReactToastify.css";
-
-type bodyProps = {
-  name: string;
-  company: string;
-  email: string;
-  telephone: string;
-  phone: string;
-  numberCollaborators: string;
-  cnpj: string;
-  message: string;
-  subject: string;
-};
-
-interface sendEmailProps {
-  subject: string;
-  body: bodyProps;
-  setText: string;
-}
-
-const mailerSend = async ({ body }: sendEmailProps) => {
-  const mailersend = await new MailerSend({
-    api_key: process.env.MAILERSEND_API_KEY,
-  });
-
-  const recipients = [
-    new Recipient(process.env.MAILERSEND_RECIPIENT, "DS-SAÚDE"),
-  ];
-
-  const emailParams = await new EmailParams()
-    .setFrom(process.env.MAILERSEND_FROM)
-    .setFromName("DS-SAÚDE")
-    .setRecipients(recipients)
-    .setReplyTo(process.env.MAILERSEND_RECIPIENT)
-    .setReplyToName("DS-SAÚDE")
-    .setSubject(body?.subject)
-    .setHtml(
-      `
-      <!DOCTYPE html>
-  <html>
+<!DOCTYPE html>
+<html>
   <head>
     <meta charset="UTF-8" />
     <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
@@ -204,9 +161,7 @@ const mailerSend = async ({ body }: sendEmailProps) => {
       <table border="0" cellpadding="0" cellspacing="0" class="body">
         <thead>
           <tr>
-            <td align="left" style="padding:2rem 0 3rem 3rem;Margin:0;font-size:0px"><img class="adapt-img" src="${
-              process.env.NEXT_PUBLIC_DOMAIN_URL + logo.src
-            }" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="180"/></td>
+            <td align="left" style="padding:2rem 0 3rem 3rem;Margin:0;font-size:0px"><img class="adapt-img" src=${process.env.API_URL} + "_next/static/media/logodssaude.abf0981b.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="180"></td>
           </tr>
           <tr>
             <td align="left" style="padding:0 0 3rem 3rem; margin-top: 40px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:80px;color:#008f59;font-size:40px"><strong>Email de Contato<br>recebido!</strong></p></td>
@@ -219,9 +174,7 @@ const mailerSend = async ({ body }: sendEmailProps) => {
       <table border="0" cellpadding="0" cellspacing="0" class="body" style="margin-top: 1rem;">
         <thead>
            <tr>
-            <td align="left" class="esd-block-text" style="padding-top: 7rem; background-image: url(${
-              process.env.NEXT_PUBLIC_DOMAIN_URL + onda.src
-            });
+            <td align="left" class="esd-block-text" style="padding-top: 7rem; background-image: url(${process.env.API_URL}_next/static/media/onda.f45b3237.png);
             background-repeat: no-repeat;
             background-size: cover;
             ">
@@ -246,14 +199,3 @@ const mailerSend = async ({ body }: sendEmailProps) => {
     </main>
   </head>
 </html>
-      `
-    );
-
-  // try{
-  //   await mailersend?.send(emailParams);
-  // }catch(err){
-  //   throw new Error('Erro ao enviar email');
-  // }
-};
-
-export default mailerSend;

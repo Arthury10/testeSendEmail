@@ -7,6 +7,9 @@ export const Header = () => {
     styles.mobilemenu
   );
   const [isOpen, setIsOpen] = useState(false);
+  const [menuSelect, setMenuSelect] = useState(false);
+
+  //mudar a cor do link do menu quando selecionado
 
   const handleOpenMenuMobile = () => {
     setIsOpen(!isOpen);
@@ -14,6 +17,11 @@ export const Header = () => {
       ? setMenuHamburgerClassName(styles.mobilemenu)
       : setMenuHamburgerClassName(styles.mobilemenuactive);
   };
+
+  const handleCloseMenuMobile = () => {
+    setIsOpen(!isOpen);
+    setMenuHamburgerClassName(styles.mobilemenu);
+  }
 
   useEffect(() => {
     window.addEventListener("resize", () => {
@@ -30,7 +38,7 @@ export const Header = () => {
         <nav className={styles.nav}>
           <div className={styles.logo}>
             <Image
-              src={require("../../public/assets/logo-ds-saude.png")}
+              src={require("../../../public/assets/logo-ds-saude.png")}
               alt="logo ds saude"
             />
           </div>
@@ -71,19 +79,19 @@ export const Header = () => {
           {isOpen && (
             <ul className={styles.navlistactive}>
               <li>
-                <a href="#home">Início</a>
+                <a href="#home" onClick={handleCloseMenuMobile}>Início</a>
               </li>
               <li>
-                <a href="#exam">Exames</a>
+                <a href="#exam" onClick={handleCloseMenuMobile}>Exames</a>
               </li>
               <li>
-                <a href="#report">Laudos</a>
+                <a href="#report" onClick={handleCloseMenuMobile}>Laudos</a>
               </li>
               <li>
-                <a href="#plan">Planos</a>
+                <a href="#plan" onClick={handleCloseMenuMobile}>Planos</a>
               </li>
               <li>
-                <a href="#contact">Contatos</a>
+                <a href="#contact" onClick={handleCloseMenuMobile}>Contatos</a>
               </li>
             </ul>
           )}
