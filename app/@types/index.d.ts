@@ -19,6 +19,7 @@ declare namespace e {
     method?: string | undefined;
     headers: IncomingHttpHeaders;
   }
+
   interface CorsOptions {
     /**
      * @default '*''
@@ -59,3 +60,11 @@ declare function e<T extends e.CorsRequest = e.CorsRequest>(
   next: (err?: any) => any
 ) => void;
 export = e;
+
+declare global {
+  interface Window {
+    grecaptcha: any;
+  }
+}
+
+export {};

@@ -11,11 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import React, { useState } from "react";
 
-interface WindowProps {
-  window: any;
-}
-
-export const FormContact = ({ window }: WindowProps) => {
+export const FormContact = () => {
   const [isCheck, setCheck] = useState(false);
   const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY;
 
