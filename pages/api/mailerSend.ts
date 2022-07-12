@@ -4,6 +4,7 @@ import MailerSend from "mailersend";
 import logo from "../../public/assets/logo.png";
 import onda from "../../public/assets/onda.png";
 import "react-toastify/dist/ReactToastify.css";
+import { NextApiRequest, NextApiResponse } from "next";
 
 type bodyProps = {
   name: string;
@@ -15,15 +16,18 @@ type bodyProps = {
   cnpj: string;
   message: string;
   subject: string;
+  token: string;
 };
 
-interface sendEmailProps {
-  subject: string;
+interface ReqProps {
   body: bodyProps;
-  setText: string;
 }
 
-const mailerSend = async ({ body }: sendEmailProps) => {
+const mailerSend = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { body }: ReqProps = req;
+  const secret = process.env.RECAPTCHA_SECRET_KEY;
+  const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${body.token}`;
+
   const mailersend = await new MailerSend({
     api_key: process.env.MAILERSEND_API_KEY,
   });
@@ -248,6 +252,14 @@ const mailerSend = async ({ body }: sendEmailProps) => {
 </html>
       `
     );
+
+  try {
+    const recaptchaRes = await fetch(verifyUrl, { method: "POST" });
+    const recaptchaJson = recaptchaRes.json();
+    res.status(200).json({ ...body, ...recaptchaJson });
+  } catch (err) {
+    res.status(400).json(err);
+  }
 
   // try{
   //   await mailersend?.send(emailParams);

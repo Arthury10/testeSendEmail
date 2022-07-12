@@ -9,14 +9,15 @@ import { TextAreaField } from "../TextAreaField";
 import styles from "./form.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import React, { useCallback, useState } from "react";
-import { Recaptcha } from "../Recaptcha";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import React, { useState } from "react";
 
-export const FormContact = () => {
-  const [token, setToken] = useState();
+interface WindowProps {
+  window: any;
+}
+
+export const FormContact = ({ window }: WindowProps) => {
   const [isCheck, setCheck] = useState(false);
-  const { executeRecaptcha } = useGoogleReCaptcha();
+  const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY;
 
   const form = useForm({
     // defaultValues: {
@@ -29,7 +30,6 @@ export const FormContact = () => {
     //   numberCollaborators: "",
     //   cnpj: "",
     //   message: "",
-    //   checkTerms: false,
     // },
     defaultValues: {
       name: "arthurropke",
@@ -41,7 +41,6 @@ export const FormContact = () => {
       numberCollaborators: "50",
       cnpj: "12345678901234",
       message: "wqduwhqudhuwqidihwq",
-      checkTerms: false,
     },
     mode: "onChange",
     resolver: yupResolver(formContact),
@@ -53,36 +52,38 @@ export const FormContact = () => {
 
   const onSubmit = form.handleSubmit(async (data) => {
     if (isCheck) {
-      try {
-        toast.success("Mensagem Enviada com sucesso!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        if (!executeRecaptcha) {
-          console.log("Execute recaptcha not yet available");
-          return;
-        }
-        executeRecaptcha("enquiryFormSubmit").then((gReCaptchaToken) => {
-          console.log(gReCaptchaToken, "response Google reCaptcha server");
-        });
-        form.reset();
-        await api.post("/mailerSend", data);
-      } catch (err) {
-        toast.error("Erro ao enviar mensagem!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      }
+      window.grecaptcha.ready(() => {
+        window.grecaptcha
+          .execute(SITE_KEY, { action: "submit" })
+          .then(async (token: any) => {
+            try {
+              toast.success("Mensagem Enviada com sucesso!", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+              form.reset();
+              await api.post("/mailerSend", {
+                ...data,
+                token,
+              });
+            } catch (err) {
+              toast.error("Erro ao enviar mensagem!", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+            }
+          });
+      });
     } else {
       toast.error(
         "Para enviar a mensagem, você deve aceitar os termos e condições!",
@@ -102,7 +103,6 @@ export const FormContact = () => {
   return (
     <FormProvider {...form}>
       <ToastContainer />
-      <Recaptcha />
       <form className={styles.form} onSubmit={onSubmit}>
         <div className={styles.inputscontainer}>
           <div className={styles.formstack}>

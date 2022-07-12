@@ -10,6 +10,9 @@ import onda from "../public/assets/onda.png";
 import { FormContact } from "../app/components/FormContact";
 import { GoogleMaps } from "../app/components/GoogleMaps";
 import { Header } from "../app/components/Header";
+import Script from "next/script";
+
+const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY;
 
 const Home: NextPage = () => {
   return (
@@ -22,6 +25,9 @@ const Home: NextPage = () => {
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         />
       </Head>
+      <Script
+        src={`https://www.google.com/recaptcha/api.js?render=${SITE_KEY}`}
+      />
       <div style={{ display: "none" }}>
         <Image src={logo} alt="logo" />
         <Image src={onda} alt="onda" />
