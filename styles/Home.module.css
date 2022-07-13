@@ -558,6 +558,7 @@
 
 /* --------- INÍCIO CONFIG. SESSÃO DO FOOTER ---------*/
 .footer {
+  z-index: 3 !important;
   display: flex;
   flex-direction: column;
   gap: 2rem;

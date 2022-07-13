@@ -30,9 +30,11 @@ export const FormContact = () => {
           top < window.innerHeight && bottom > size + height - 100;
         if (isVisible) {
           setIsForm(true);
+          // @ts-ignore
           badge.style.visibility = "visible";
         } else {
           setIsForm(false);
+          // @ts-ignore
           badge.style.visibility = "hidden";
         }
       });
