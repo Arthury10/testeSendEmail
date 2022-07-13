@@ -24,6 +24,14 @@ body {
   background-color: var(--second-color-opacity);
 }
 
+.grecaptcha-badge {
+  visibility: hidden;
+}
+
+.grecaptcha-badge.show {
+  visibility: visibility;
+}
+
 @media (max-width: 750px) {
   body {
     overflow-x: hidden;

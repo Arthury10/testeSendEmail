@@ -26,7 +26,7 @@ interface ReqProps {
 const mailerSend = async (req: NextApiRequest, res: NextApiResponse) => {
   const { body }: ReqProps = req;
   const secret = process.env.RECAPTCHA_SECRET_KEY;
-  const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${body.token}`;
+  const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${body?.token}`;
 
   const mailersend = await new MailerSend({
     api_key: process.env.MAILERSEND_API_KEY,
@@ -255,17 +255,18 @@ const mailerSend = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     const recaptchaRes = await fetch(verifyUrl, { method: "POST" });
-    const recaptchaJson = recaptchaRes.json();
+    const recaptchaJson = await recaptchaRes.json();
     res.status(200).json({ ...body, ...recaptchaJson });
+    try {
+      if (recaptchaRes.ok) {
+        await mailersend?.send(emailParams);
+      }
+    } catch (err) {
+      throw new Error("Erro ao enviar email");
+    }
   } catch (err) {
     res.status(400).json(err);
   }
-
-  // try{
-  //   await mailersend?.send(emailParams);
-  // }catch(err){
-  //   throw new Error('Erro ao enviar email');
-  // }
 };
 
 export default mailerSend;

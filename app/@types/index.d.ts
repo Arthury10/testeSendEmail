@@ -65,6 +65,11 @@ declare global {
   interface Window {
     grecaptcha: any;
   }
+
+  interface Badge {
+    badge: any;
+    style: any;
+  }
 }
 
 export {};

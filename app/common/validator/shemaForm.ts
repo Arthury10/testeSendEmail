@@ -15,8 +15,7 @@ export const formContact = Yup.object()
       .required("A Empresa é obrigatória")
       .typeError("Informe uma Empresa válida")
       .min(6, "A Empresa deve ter no mínimo 6 caracteres"),
-    message: Yup.string()
-      .typeError("Informe uma Mensagem válida"),
+    message: Yup.string().typeError("Informe uma Mensagem válida"),
     telephone: Yup.string()
       .typeError("Informe um Telefone válido")
       .transform((value) => value.replace(/\D/g, "")),
@@ -39,6 +38,5 @@ export const formContact = Yup.object()
       .min(14, "O CNPJ deve ter no mínimo 14 caracteres")
       .max(14, "O CNPJ deve ter no máximo 14 caracteres")
       .transform((value) => value.replace(/\D/g, "")),
-      checkTerms: Yup.boolean().required("O Termo é obrigatório"),
   })
   .noUnknown();

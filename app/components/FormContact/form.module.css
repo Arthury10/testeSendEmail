@@ -1,3 +1,8 @@
+.grecaptchabadge {
+  visibility: visibility;
+  opacity: opacity;
+}
+
 .form {
   display: flex;
   flex-direction: column;
